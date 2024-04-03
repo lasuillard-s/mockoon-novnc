@@ -1,0 +1,39 @@
+{
+  "welcomeShown": true,
+  "bannerDismissed": [],
+  "logSizeLimit": 10000,
+  "maxLogsPerEnvironment": 50,
+  "truncateRouteName": true,
+  "mainMenuSize": 181,
+  "secondaryMenuSize": 200,
+  "fakerLocale": "en",
+  "fakerSeed": null,
+  "lastChangelog": "8.0.0",
+  "environments": [
+    {
+      "uuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
+      "path": "/root/.config/mockoon/storage/demo.json",
+      "cloud": false,
+      "lastServerHash": null
+    }
+  ],
+  "disabledRoutes": {},
+  "collapsedFolders": {
+    "7da8af3d-b9d8-4b17-9285-914e03343b3d": []
+  },
+  "enableTelemetry": false,
+  "storagePrettyPrint": true,
+  "fileWatcherEnabled": "auto",
+  "dialogWorkingDir": "/root/.config/mockoon/storage",
+  "startEnvironmentsOnLoad": true,
+  "logTransactions": true,
+  "envVarsPrefix": "MOCKOON_",
+  "environmentsCategoriesOrder": [
+    "local",
+    "cloud"
+  ],
+  "environmentsCategoriesCollapsed": {
+    "local": false,
+    "cloud": false
+  }
+}

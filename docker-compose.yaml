@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  mockoon:
+    build: .
+    environment:
+      DISPLAY_WIDTH: '${NOVNC_DISPLAY_WIDTH:-1600}'
+      DISPLAY_HEIGHT: '${NOVNC_DISPLAY_HEIGHT:-968}'
+      RUN_XTERM: '${NOVNC_RUN_XTERM:-no}'
+      RUN_FLUXBOX: '${NOVNC_RUN_FLUXBOX:-yes}'
+    volumes:
+      - /root/.config/mockoon
+      - ${MOCKOON_DATA_DIR:-./mockoon/storage}:/root/.config/mockoon/storage
+    ports:
+      - ${MOCKOON_HOST:-127.0.0.1}:${MOCKOON_PORT:-3000}:3000
+      - ${NOVNC_HOST:-127.0.0.1}:${NOVNC_PORT:-8080}:8080
