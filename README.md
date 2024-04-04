@@ -24,6 +24,21 @@ This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/
 
 You can try this image with Docker Compose by simply checking it out and running `docker compose up --build`. For more details, please check `docker-compose.yaml` file.
 
+To pull and run image from Docker Hub, as follow:
+
+```bash
+$ docker run --rm \
+    -p 127.0.0.1:3000-3010:3000-3010 \
+    -p 127.0.0.1:8000:8000 \
+    -p 127.0.0.1:80:80 \
+    -e DISPLAY_WIDTH=1024 \
+    -e DISPLAY_HEIGHT=768 \
+    -e RUN_XTERM=no \
+    -e RUN_PATHPORT=yes \
+    -e NGINX_PATHPORT=yes \
+    lasuillard/mockoon-novnc:main
+```
+
 This image extends base image trying to preserve all its features. Variables such as `DISPLAY_WIDTH` and `DISPLAY_HEIGHT` should available, see details from the corresponding repository, [theasp/novnc](https://github.com/theasp/docker-novnc/).
 
 - `NGINX_PATHPORT`
