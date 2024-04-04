@@ -43,11 +43,13 @@ $ docker run --rm \
 
 This image extends base image trying to preserve all its features. Variables such as `DISPLAY_WIDTH` and `DISPLAY_HEIGHT` should available, see details from the corresponding repository, [theasp/novnc](https://github.com/theasp/docker-novnc/).
 
+Below are variables defined by this image:
+
 - `NGINX_PATHPORT`
 
     To enable path-based port forwarding, set environment variable `NGINX_PATHPORT` to `"yes"` when you run the container.
 
-Once the container is up, you can access to noVNC UI at port http://localhost:8080. By default, demo mock API will be available at http://localhost:3000 (or http://localhost/3000 if you didn't disabled the NGINX path port).
+Once the container is up, you can access to noVNC UI at port http://localhost:8080. By default, demo mock API will be available at http://localhost:3000 (or http://localhost/3000 if you've enabled the NGINX path port).
 
 Test it with following simple `curl` command:
 
