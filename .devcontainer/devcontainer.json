@@ -1,0 +1,22 @@
+{
+  "name": "lasuillard/mockoon-novnc",
+  "image": "mcr.microsoft.com/devcontainers/base:1-bookworm",
+  "features": {
+      "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+      "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "onCreateCommand": "./.devcontainer/onCreateCommand.sh",
+  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+  "customizations": {
+      "vscode": {
+          "extensions": [
+              "ldez.ignore-files",
+              "gruntfuggly.todo-tree",
+              "redhat.vscode-yaml",
+              "tamasfe.even-better-toml",
+              "streetsidesoftware.code-spell-checker",
+              "EditorConfig.EditorConfig"
+          ]
+      }
+  }
+}
