@@ -1,5 +1,7 @@
 # mockoon-novnc
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Docker image for Mockoon GUI with noVNC.
 
 ## ✨ Features
@@ -12,7 +14,7 @@ This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/
 
     Mockoon provides features to run multiple Mockoon environments however you will need additional ports. Behind load balancers, for example, AWS Application Load Balancers (ALB), it's not easy to expose range of ports easily, if you wish to expose hundreds of ports (e.g. 3000-3999).
 
-    Here NGINX comes in. Instead of specifying port to host, send rqeuest as following:
+    Here NGINX comes in. Instead of specifying port to host, send request as following:
 
         http://localhost/3000/path/to/mock
 
@@ -24,7 +26,7 @@ This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/
 
 You can try this image with Docker Compose by simply checking it out and running `docker compose up --build`. For more details, please check `docker-compose.yaml` file.
 
-To pull and run image from Docker Hub, as follow:
+To pull and run image from [Docker Hub](https://hub.docker.com/r/lasuillard/mockoon-novnc), as follow:
 
 ```bash
 $ docker run --rm \
@@ -69,6 +71,6 @@ There are known limitations so far:
 
 - Clipboard may not work properly for some languages due to limitations of noVNC itself, which the base image relies on. See related issue [here](https://github.com/novnc/noVNC/issues/1708).
 
-# 🙏 Thanks
+## 🙏 Thanks
 
 This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/).
