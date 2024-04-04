@@ -2,7 +2,9 @@
 
 # Allowed things
 !mockoon/**
+!nginx/**
 !supervisord/**
+!docker-entrypoint.sh
 
 # Extra exclude from allowed things
 **/*~

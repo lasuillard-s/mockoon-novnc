@@ -2,6 +2,7 @@ FROM theasp/novnc:latest
 
 RUN apt-get update && apt-get install -y \
     fonts-noto \
+    nginx \
     wget \
     # Mockoon
     libasound2 \
@@ -21,5 +22,10 @@ RUN wget --output-document /tmp/mockoon.deb "https://github.com/mockoon/mockoon/
     && dpkg -i /tmp/mockoon.deb \
     && rm /tmp/mockoon.deb
 
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./mockoon/storage/* /root/.config/mockoon/storage/
-COPY ./supervisord/conf.d/mockoon.conf /app/conf.d/
+COPY ./supervisord/conf.d/* /app/conf.d/
+
+COPY ./docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
