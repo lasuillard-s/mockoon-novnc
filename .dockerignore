@@ -5,6 +5,7 @@
 !nginx/**
 !supervisord/**
 !docker-entrypoint.sh
+!LICENSE
 
 # Extra exclude from allowed things
 **/*~
