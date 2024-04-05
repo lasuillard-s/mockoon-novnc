@@ -57,7 +57,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.ref, "refs/tags/v")
+    if: startsWith(github.event.ref, 'refs/tags/v')
     needs: [build-and-push-image]
     permissions:
       contents: write
