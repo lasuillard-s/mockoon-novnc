@@ -25,6 +25,8 @@ This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/
 
     By default, if port not specified in path it will be redirected to port 3000. Request to `http://localhost/path/to/mock` is equal to `http://localhost/3000/path/to/mock`.
 
+    > Only port range in 3000-3999 will be forwarded by configuration, otherwise NGINX will respond with **404 Not Found**.
+
 ## 📔 Usage
 
 You can try this image with Docker Compose by simply checking it out and running `docker compose up --build`. For more details, please check `docker-compose.yaml` file.
