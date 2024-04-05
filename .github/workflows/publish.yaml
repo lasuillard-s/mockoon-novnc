@@ -4,6 +4,8 @@ on:
   push:
     tags: ["v*"]
 
+permissions: read-all
+
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
