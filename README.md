@@ -1,6 +1,7 @@
 # mockoon-novnc
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/lasuillard/mockoon-novnc/main.svg)](https://results.pre-commit.ci/latest/github/lasuillard/mockoon-novnc/main)
 
 Docker image for Mockoon GUI with noVNC.
 
