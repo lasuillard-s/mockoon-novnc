@@ -41,7 +41,7 @@ $ docker run --rm \
     -e DISPLAY_WIDTH=1024 \
     -e DISPLAY_HEIGHT=768 \
     -e RUN_XTERM=no \
-    -e RUN_PATHPORT=yes \
+    -e RUN_FLUXBOX=yes \
     -e NGINX_PATHPORT=yes \
     lasuillard/mockoon-novnc:main
 ```
