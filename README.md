@@ -5,6 +5,8 @@
 
 Docker image for Mockoon GUI with noVNC.
 
+![Demo](/docs/demo.png)
+
 ## ✨ Features
 
 [Mockoon](https://mockoon.com/) is great free, open-source mock server GUI application provides rich features except it does not provide web-based UI. This image aims to provide an workaround for web-based UI of Mockoon.
