@@ -1,5 +1,5 @@
 {
-  "welcomeShown": true,
+  "welcomeShown": false,
   "bannerDismissed": [],
   "logSizeLimit": 10000,
   "maxLogsPerEnvironment": 50,
