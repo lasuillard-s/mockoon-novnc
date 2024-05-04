@@ -37,7 +37,7 @@ To pull and run image from [Docker Hub](https://hub.docker.com/r/lasuillard/mock
 
 ```bash
 $ docker run --rm \
-    -p 127.0.0.1:3000-3010:3000-3010 \
+    -p 127.0.0.1:3000:3000 \
     -p 127.0.0.1:8000:8000 \
     -p 127.0.0.1:80:80 \
     -e DISPLAY_WIDTH=1024 \

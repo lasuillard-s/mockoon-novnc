@@ -1,7 +1,5 @@
-version: '3'
-
 services:
-  mockoon:
+  app:
     build: .
     environment:
       DISPLAY_WIDTH: "1024"
@@ -13,6 +11,12 @@ services:
       - /root/.config/mockoon
       - ./mockoon/storage:/root/.config/mockoon/storage
     ports:
-      - 127.0.0.1:3000-3010:3000-3010
-      - 127.0.0.1:8080:8080
-      - 127.0.0.1:80:80
+      - ${MOCKOON_HOST:-127.0.0.1}:${MOCKOON_PORT:-3000}:3000
+      - ${NOVNC_HOST:-127.0.0.1}:${NOVNC_PORT:-8080}:8080
+      - ${NGINX_HOST:-127.0.0.1}:${NGINX_PORT:-80}:80
+    healthcheck:
+      test: wget http://localhost/users --spider || exit 1
+      interval: 3s
+      timeout: 2s
+      retries: 5
+      start_period: 5s

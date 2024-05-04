@@ -5,6 +5,7 @@
     "redhat.vscode-yaml",
     "tamasfe.even-better-toml",
     "streetsidesoftware.code-spell-checker",
-    "EditorConfig.EditorConfig"
+    "EditorConfig.EditorConfig",
+    "jetmartin.bats"
   ]
 }
