@@ -19,5 +19,8 @@
         "jetmartin.bats"
       ]
     }
-  }
+  },
+  "runArgs": [
+    "--network=host"
+  ]
 }
