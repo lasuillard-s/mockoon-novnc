@@ -16,6 +16,16 @@ jobs:
       - name: Set up Bats
         uses: bats-core/bats-action@2.0.0
 
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: local-test:no-publish
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Run tests
         run: |
           bats ./test
