@@ -2,8 +2,8 @@ services:
   app:
     build: .
     environment:
-      DISPLAY_WIDTH: "1024"
-      DISPLAY_HEIGHT: "768"
+      DISPLAY_WIDTH: "1600"
+      DISPLAY_HEIGHT: "900"
       RUN_XTERM: "no"
       RUN_FLUXBOX: "yes"
       NGINX_PATHPORT: "yes"

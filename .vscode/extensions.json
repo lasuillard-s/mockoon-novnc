@@ -6,6 +6,8 @@
     "tamasfe.even-better-toml",
     "streetsidesoftware.code-spell-checker",
     "EditorConfig.EditorConfig",
-    "jetmartin.bats"
+    "jetmartin.bats",
+    "foxundermoon.shell-format",
+    "ahmadalli.vscode-nginx-conf"
   ]
 }
