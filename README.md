@@ -29,6 +29,19 @@ This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/
 
     > Only port range in 3000-3999 will be forwarded by configuration, otherwise NGINX will respond with **404 Not Found**.
 
+- Header-based port forwarding
+
+    Instead of port in path, you can use `X-Port-Forward` header to desired port number. It would be useful if you don't want path modification.
+
+    ```bash
+    $ curl --fail --silent http://localhost --header 'X-Port-Forward: 3678'
+    {"Hello": "World!"}
+    ```
+
+    Port range here also restricted to range of 3000-3999.
+
+    > Path-based port forwarding may take precedence.
+
 ## 📔 Usage
 
 You can try this image with Docker Compose by simply checking it out and running `docker compose up --build`. For more details, please check `docker-compose.yaml` file.
