@@ -15,10 +15,12 @@ teardown_file() {
 # ============================================================================
 @test "NGINX forward traffic to Mockoon 3000 port by default" {
   run curl --fail http://localhost/users
+  assert_success
 }
 
 @test "Can reach noVNC client" {
   run curl --fail http://localhost:8080/vnc.html
+  assert_success
 }
 
 # Path-based port forwarding
