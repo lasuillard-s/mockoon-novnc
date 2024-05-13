@@ -8,7 +8,7 @@ setup() {
 }
 
 teardown_file() {
-  docker compose down
+	docker compose down
 }
 
 # Basic tests
