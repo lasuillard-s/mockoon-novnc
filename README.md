@@ -6,7 +6,7 @@
 
 Docker image for Mockoon GUI with noVNC.
 
-![Demo](https://github.com/lasuillard/mockoon-novnc/blob/main/docs/demo.png)
+![Demo](/docs/demo.png)
 
 ## ✨ Features
 
