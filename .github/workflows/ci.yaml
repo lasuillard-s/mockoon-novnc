@@ -24,7 +24,7 @@ jobs:
         uses: bats-core/bats-action@2.0.0
 
       - name: Build Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: false
