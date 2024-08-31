@@ -9,4 +9,4 @@ false | no | n | 0)
 esac
 
 # Base image
-exec /app/entrypoint.sh
+exec supervisord -c /app/supervisord.conf
