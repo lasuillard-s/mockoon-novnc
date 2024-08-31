@@ -20,9 +20,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Set up Bats
-        uses: bats-core/bats-action@2.0.0
-
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
