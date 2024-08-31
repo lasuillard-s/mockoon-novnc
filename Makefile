@@ -4,8 +4,6 @@ MAKEFLAGS += --warn-undefined-variable
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 
--include Makefile.*
-
 SHELL := bash
 .ONESHELL:
 .SHELLFLAGS := -eu -o pipefail -c
@@ -13,17 +11,14 @@ SHELL := bash
 .DEFAULT_GOAL := help
 
 help: Makefile  ## Show help
-	for makefile in $(MAKEFILE_LIST)
-	do
-		@echo "$${makefile}"
-		@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' "$${makefile}" | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
-	done
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 
 # =============================================================================
 # Common
 # =============================================================================
 install:  ## Install deps
+	git submodule update --init --recursive --remote
 	pre-commit install --install-hooks
 .PHONY: install
 
@@ -43,13 +38,14 @@ ci: lint test  ## Run CI tasks
 .PHONY: ci
 
 format:  ## Run autoformatters
-
+	pre-commit run --all-files shfmt
 .PHONY: format
 
 lint:  ## Run all linters
-
+	pre-commit run --all-files shellcheck
 .PHONY: lint
 
 test:  ## Run tests
+	docker compose build
 	./test/bats/bin/bats ./test
 .PHONY: test
