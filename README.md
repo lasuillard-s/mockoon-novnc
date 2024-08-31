@@ -56,8 +56,6 @@ $ docker run --rm \
     -p 127.0.0.1:80:80 \
     -e DISPLAY_WIDTH=1024 \
     -e DISPLAY_HEIGHT=768 \
-    -e RUN_XTERM=no \
-    -e RUN_FLUXBOX=yes \
     -e NGINX_PATHPORT=yes \
     lasuillard/mockoon-novnc:main
 ```
@@ -96,4 +94,4 @@ There are known limitations so far:
 
 ## 🙏 Thanks
 
-This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/).
+This image previously has been built based on [theasp/novnc](https://github.com/theasp/docker-novnc/).

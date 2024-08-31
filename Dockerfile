@@ -15,9 +15,6 @@ RUN apt-get update && apt-get install -y \
     nginx \
     novnc \
     supervisor \
-    tigervnc-standalone-server \
-    tigervnc-viewer \
-    tigervnc-xorg-extension \
     wget \
     x11vnc \
     xdg-utils \

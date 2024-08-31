@@ -8,5 +8,4 @@ false | no | n | 0)
 	;;
 esac
 
-# Base image
 exec supervisord -c /app/supervisord.conf
