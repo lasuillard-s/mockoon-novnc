@@ -10,9 +10,9 @@ Docker image for Mockoon GUI with noVNC.
 
 ## ✨ Features
 
-[Mockoon](https://mockoon.com/) is great free, open-source mock server GUI application provides rich features except it does not provide web-based UI. This image aims to provide an workaround for web-based UI of Mockoon.
+[Mockoon](https://mockoon.com/) is great free, open-source mock server GUI application provides rich features except it does not provide web-based UI. This image aims to provide an workaround for web-based UI of Mockoon, providing extra mocking functionalities for development environments:
 
-This image built based on [theasp/novnc](https://github.com/theasp/docker-novnc/) and reuse most of its feature, but with extra functionalities:
+- Provide access to Mockoon GUI through web UI (noVNC)
 
 - NGINX for path-based port forwarding
 
@@ -52,15 +52,13 @@ To pull and run image from [Docker Hub](https://hub.docker.com/r/lasuillard/mock
 ```bash
 $ docker run --rm \
     -p 127.0.0.1:3000:3000 \
-    -p 127.0.0.1:8000:8000 \
+    -p 127.0.0.1:8080:8080 \
     -p 127.0.0.1:80:80 \
     -e DISPLAY_WIDTH=1024 \
     -e DISPLAY_HEIGHT=768 \
     -e NGINX_PATHPORT=yes \
     lasuillard/mockoon-novnc:main
 ```
-
-This image extends base image trying to preserve all its features. Variables such as `DISPLAY_WIDTH` and `DISPLAY_HEIGHT` should available, see details from the corresponding repository, [theasp/novnc](https://github.com/theasp/docker-novnc/).
 
 Below are variables defined by this image:
 
@@ -83,6 +81,12 @@ Or,
 $ curl http://localhost/3000/users
 [{"id":"054bf92d-cf1f-4c66-8fc9-256a1f41c480","username":"Kaela10"},...]
 ```
+
+Supported environment variables:
+
+- `DISPLAY_WIDTH`, `DISPLAY_HEIGHT`: noVNC display geometry. Each defaults to `1024` and `768`.
+
+- `NGINX_PATHPORT`: Whether to use NGINX path-based and header-based port forwarding. Disabled by default.
 
 ## ⚠️ Limitations
 
