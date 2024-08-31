@@ -1,5 +1,5 @@
 {
-  "welcomeShown": false,
+  "welcomeShown": true,
   "bannerDismissed": [],
   "maxLogsPerEnvironment": 50,
   "truncateRouteName": true,
@@ -40,5 +40,7 @@
   "environmentsCategoriesCollapsed": {
     "local": false,
     "cloud": false
-  }
+  },
+  "activeEnvironmentUuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
+  "enableRandomLatency": false
 }
