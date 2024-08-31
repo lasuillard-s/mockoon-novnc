@@ -1,10 +1,8 @@
-FROM theasp/novnc:latest
+FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y \
+    fluxbox \
     fonts-noto \
-    nginx \
-    wget \
-    # Mockoon
     libasound2 \
     libatspi2.0-0 \
     libgbm-dev \
@@ -14,7 +12,13 @@ RUN apt-get update && apt-get install -y \
     libsecret-1-0 \
     libxss1 \
     libxtst6 \
+    nginx \
+    novnc \
+    supervisor \
+    wget \
+    x11vnc \
     xdg-utils \
+    xvfb \
     && apt-get clean
 
 ARG MOCKOON_VERSION="8.1.1"
@@ -25,7 +29,12 @@ RUN wget --output-document /tmp/mockoon.deb "https://github.com/mockoon/mockoon/
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./mockoon/storage/* /root/.config/mockoon/storage/
 COPY ./supervisord/conf.d/* /app/conf.d/
+COPY ./supervisord/supervisord.conf /app/supervisord.conf
 
 COPY ./docker-entrypoint.sh /
+
+ENV DISPLAY=":0.0" \
+    DISPLAY_WIDTH="1024" \
+    DISPLAY_HEIGHT="768"
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

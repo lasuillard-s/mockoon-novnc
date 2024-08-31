@@ -4,8 +4,6 @@ services:
     environment:
       DISPLAY_WIDTH: "1600"
       DISPLAY_HEIGHT: "900"
-      RUN_XTERM: "no"
-      RUN_FLUXBOX: "yes"
       NGINX_PATHPORT: "yes"
     volumes:
       - /root/.config/mockoon
