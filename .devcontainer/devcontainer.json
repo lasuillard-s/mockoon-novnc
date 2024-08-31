@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/base:1-bookworm",
   "features": {
     "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "onCreateCommand": "./.devcontainer/onCreateCommand.sh",
   "postAttachCommand": "pre-commit install",
@@ -18,11 +18,9 @@
         "EditorConfig.EditorConfig",
         "jetmartin.bats",
         "foxundermoon.shell-format",
-        "ahmadalli.vscode-nginx-conf"
+        "ahmadalli.vscode-nginx-conf",
+        "timonwong.shellcheck"
       ]
     }
-  },
-  "runArgs": [
-    "--network=host"
-  ]
+  }
 }

@@ -8,6 +8,7 @@
     "EditorConfig.EditorConfig",
     "jetmartin.bats",
     "foxundermoon.shell-format",
-    "ahmadalli.vscode-nginx-conf"
+    "ahmadalli.vscode-nginx-conf",
+    "timonwong.shellcheck"
   ]
 }
