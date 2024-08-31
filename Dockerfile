@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     xvfb \
     && apt-get clean
 
-ARG MOCKOON_VERSION="8.1.1"
+ARG MOCKOON_VERSION="8.4.0"
 RUN wget --output-document /tmp/mockoon.deb "https://github.com/mockoon/mockoon/releases/download/v${MOCKOON_VERSION}/mockoon-${MOCKOON_VERSION}.$(dpkg --print-architecture).deb" \
     && dpkg -i /tmp/mockoon.deb \
     && rm /tmp/mockoon.deb

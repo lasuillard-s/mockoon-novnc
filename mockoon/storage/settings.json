@@ -1,5 +1,5 @@
 {
-  "welcomeShown": false,
+  "welcomeShown": true,
   "bannerDismissed": [],
   "maxLogsPerEnvironment": 50,
   "truncateRouteName": true,
@@ -7,7 +7,7 @@
   "secondaryMenuSize": 200,
   "fakerLocale": "en",
   "fakerSeed": null,
-  "lastChangelog": "8.1.1",
+  "lastChangelog": "8.4.0",
   "environments": [
     {
       "uuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
@@ -40,5 +40,7 @@
   "environmentsCategoriesCollapsed": {
     "local": false,
     "cloud": false
-  }
+  },
+  "activeEnvironmentUuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
+  "enableRandomLatency": false
 }

@@ -1,3 +1,4 @@
+exclude: mockoon/storage/.*
 repos:
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.8.0-1
