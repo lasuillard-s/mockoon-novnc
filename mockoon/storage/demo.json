@@ -1,6 +1,6 @@
 {
   "uuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
-  "lastMigration": 32,
+  "lastMigration": 33,
   "name": "Demo API",
   "endpointPrefix": "",
   "latency": 0,
@@ -35,7 +35,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "f8a466c4-ac8e-4e20-99a2-fb52455c8a90",
@@ -64,7 +66,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "49e99c6b-35b0-44f5-8dfe-c6b7bab783c7",
@@ -147,7 +151,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "dc7ae32c-351b-44e8-b498-85063b4d7c0c",
@@ -181,7 +187,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "7fa9d291-18eb-4b14-9cdb-6a631f9e19e0",
@@ -218,7 +226,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": "FALLBACK"
+      "responseMode": "FALLBACK",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "1ef7e887-1722-44f3-b8c5-3138a3c6044d",
@@ -252,7 +262,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "method": "get",
@@ -286,7 +298,9 @@
       ],
       "uuid": "27405db8-b066-4a4d-8700-d1029bb3ce5e",
       "type": "http",
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [

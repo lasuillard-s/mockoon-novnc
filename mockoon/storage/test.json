@@ -1,6 +1,6 @@
 {
   "uuid": "7a087c49-68e0-49df-91cb-6cad74e36ba9",
-  "lastMigration": 32,
+  "lastMigration": 33,
   "name": "Test",
   "endpointPrefix": "",
   "latency": 0,
@@ -35,7 +35,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
