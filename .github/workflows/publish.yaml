@@ -48,7 +48,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-
   release:
     runs-on: ubuntu-latest
     if: startsWith(github.event.ref, 'refs/tags/v')
@@ -70,3 +69,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ vars.DOCKER_REPOSITORY }}
+          short-description: ${{ github.event.repository.description }}
+          enable-url-completion: true
