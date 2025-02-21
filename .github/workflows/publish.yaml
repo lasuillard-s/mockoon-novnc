@@ -11,8 +11,9 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
+    environment: docker
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,23 +49,9 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  release:
-    runs-on: ubuntu-latest
-    if: startsWith(github.event.ref, 'refs/tags/v')
-    needs: [build-and-push-image]
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Create release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-
       - name: Update Docker Hub repository description
         uses: peter-evans/dockerhub-description@v4
+        if: startsWith(github.event.ref, 'refs/tags/v')
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
