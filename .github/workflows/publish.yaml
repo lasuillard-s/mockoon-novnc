@@ -8,11 +8,22 @@ on:
 permissions: read-all
 
 jobs:
-  build-and-push-image:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      packages: write
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+
+  build-and-push-image:
+    runs-on: ubuntu-latest
     environment: docker
     steps:
       - name: Checkout repository
