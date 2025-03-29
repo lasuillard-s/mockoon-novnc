@@ -1,10 +1,15 @@
-name: Autoupdate
+name: Autoupdate Mockoon
 
 on:
   # TODO(lasuillard): Use a cron job instead of a push event (run weekly)
+  #                   ; Used for testing purpose; to be removed before merging
   push:
     branches:
       - 17-autoupdate-mockoon-version
+
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # Every Monday at 00:00 UTC (09:00 KST)
 
 jobs:
   autoupdate:
@@ -33,8 +38,10 @@ jobs:
           echo "${{ steps.version-info.outputs.latest_version }}" > .mockoon-version
           echo "Updated .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}"
 
-      # TODO(lasuillard): Testing for now; update the following step to create a pull request
       - name: Create pull request
         if: steps.version-info.outputs.upgrade_required == 'yes'
-        run: |
-          echo "Creating pull request..."
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'Update .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}'
+          branch: autoupdate-mockoon-version/${{ steps.version-info.outputs.latest_version }}
+          delete-branch: true
