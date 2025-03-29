@@ -23,9 +23,9 @@ jobs:
           latest_version="${latest_version#v}"
           upgrade_required="$(dpkg --compare-versions "$latest_version" gt "$current_version" && echo "yes" || echo "no")"
 
-          echo "current_version=${current_version}" >> $GITHUB_OUTPUT
-          echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
-          echo "upgrade_required=${upgrade_required}" >> $GITHUB_OUTPUT
+          echo "current_version=${current_version}" | tee --append $GITHUB_OUTPUT
+          echo "latest_version=${latest_version}" | tee --append $GITHUB_OUTPUT
+          echo "upgrade_required=${upgrade_required}" | tee --append $GITHUB_OUTPUT
 
       - name: Update .mockoon-version file
         if: steps.version-info.outputs.upgrade_required == 'yes'
