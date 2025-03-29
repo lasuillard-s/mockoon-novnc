@@ -4,6 +4,7 @@
 !mockoon/**
 !nginx/**
 !supervisord/**
+!.mockoon-version
 !docker-entrypoint.sh
 !LICENSE
 
