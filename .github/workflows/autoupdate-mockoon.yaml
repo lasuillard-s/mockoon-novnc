@@ -43,6 +43,6 @@ jobs:
         if: steps.version-info.outputs.upgrade_required == 'yes'
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: 'Update .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}'
-          branch: autoupdate-mockoon-version/${{ steps.version-info.outputs.latest_version }}
+          title: 'Update .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}'
+          branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
           delete-branch: true
