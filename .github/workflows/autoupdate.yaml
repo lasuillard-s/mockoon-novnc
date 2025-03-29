@@ -1,0 +1,40 @@
+name: Autoupdate
+
+on:
+  # TODO(lasuillard): Use a cron job instead of a push event (run weekly)
+  push:
+    branches:
+      - 17-autoupdate-mockoon-version
+
+jobs:
+  autoupdate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Query the latest version of Mockoon
+        id: version-info
+        run: |
+          current_version="$(cat .mockoon-version)"
+          latest_version="$(curl --silent https://api.github.com/repos/mockoon/mockoon/releases/latest | jq -r '.tag_name')"
+          latest_version="${latest_version#v}"
+          upgrade_required="$(dpkg --compare-versions "$latest_version" gt "$current_version" && echo "yes" || echo "no")"
+
+          echo "current_version=${current_version}" >> $GITHUB_OUTPUT
+          echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
+          echo "upgrade_required=${upgrade_required}" >> $GITHUB_OUTPUT
+
+      - name: Update .mockoon-version file
+        if: steps.version-info.outputs.upgrade_required == 'yes'
+        run: |
+          echo "${{ steps.version-info.outputs.latest_version }}" > .mockoon-version
+          echo "Updated .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}"
+
+      # TODO(lasuillard): Testing for now; update the following step to create a pull request
+      - name: Create pull request
+        if: steps.version-info.outputs.upgrade_required == 'yes'
+        run: |
+          echo "Creating pull request..."
