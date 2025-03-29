@@ -1,12 +1,6 @@
 name: Autoupdate Mockoon
 
 on:
-  # TODO(lasuillard): Use a cron job instead of a push event (run weekly)
-  #                   ; Used for testing purpose; to be removed before merging
-  push:
-    branches:
-      - 17-autoupdate-mockoon-version
-
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 1' # Every Monday at 00:00 UTC (09:00 KST)
