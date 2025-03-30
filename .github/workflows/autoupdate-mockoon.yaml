@@ -1,0 +1,42 @@
+name: Autoupdate Mockoon
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # Every Monday at 00:00 UTC (09:00 KST)
+
+jobs:
+  autoupdate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Query the latest version of Mockoon
+        id: version-info
+        run: |
+          current_version="$(cat .mockoon-version)"
+          latest_version="$(curl --silent https://api.github.com/repos/mockoon/mockoon/releases/latest | jq -r '.tag_name')"
+          latest_version="${latest_version#v}"
+          upgrade_required="$(dpkg --compare-versions "$latest_version" gt "$current_version" && echo "yes" || echo "no")"
+
+          echo "current_version=${current_version}" | tee --append $GITHUB_OUTPUT
+          echo "latest_version=${latest_version}" | tee --append $GITHUB_OUTPUT
+          echo "upgrade_required=${upgrade_required}" | tee --append $GITHUB_OUTPUT
+
+      - name: Update .mockoon-version file
+        if: steps.version-info.outputs.upgrade_required == 'yes'
+        run: |
+          echo "${{ steps.version-info.outputs.latest_version }}" > .mockoon-version
+          echo "Updated .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}"
+
+      - name: Create pull request
+        if: steps.version-info.outputs.upgrade_required == 'yes'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: 'Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}'
+          branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
+          delete-branch: true
