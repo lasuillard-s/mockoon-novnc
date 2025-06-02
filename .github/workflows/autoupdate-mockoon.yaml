@@ -33,10 +33,19 @@ jobs:
           echo "${{ steps.version-info.outputs.latest_version }}" > .mockoon-version
           echo "Updated .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}"
 
+      - name: Generate GitHub App token
+        if: steps.version-info.outputs.upgrade_required == 'yes'
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Create pull request
         if: steps.version-info.outputs.upgrade_required == 'yes'
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ steps.generate-token.outputs.token }}
           title: 'Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}'
           branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
           delete-branch: true
