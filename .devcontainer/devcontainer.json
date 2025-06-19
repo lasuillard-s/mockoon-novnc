@@ -2,7 +2,7 @@
   "name": "lasuillard/mockoon-novnc",
   "image": "mcr.microsoft.com/devcontainers/base:1-bookworm",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+    "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "postAttachCommand": "pre-commit install",
