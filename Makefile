@@ -18,7 +18,7 @@ help: Makefile  ## Show help
 # Common
 # =============================================================================
 install:  ## Install deps
-	git submodule update --init --recursive --remote
+	git submodule update --init --recursive
 	pre-commit install --install-hooks
 .PHONY: install
 
