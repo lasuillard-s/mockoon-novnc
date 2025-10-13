@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/lasuillard/mockoon-novnc/main.svg)](https://results.pre-commit.ci/latest/github/lasuillard/mockoon-novnc/main)
-![GitHub Release](https://img.shields.io/github/v/release/lasuillard/mockoon-novnc)
+[![Docker Image Version](https://img.shields.io/docker/v/lasuillard/mockoon-novnc?sort=semver)](https://hub.docker.com/r/lasuillard/mockoon-novnc)
 
 Docker image for Mockoon GUI with noVNC.
 
