@@ -46,6 +46,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.generate-token.outputs.token }}
+          sign-commits: true
           title: 'Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}'
           branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
           delete-branch: true
