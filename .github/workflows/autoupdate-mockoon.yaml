@@ -3,7 +3,7 @@ name: Autoupdate Mockoon
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 1' # Every Monday at 00:00 UTC (09:00 KST)
+    - cron: "0 0 * * 1" # Every Monday at 00:00 UTC (09:00 KST)
 
 jobs:
   autoupdate:
@@ -43,10 +43,10 @@ jobs:
 
       - name: Create pull request
         if: steps.version-info.outputs.upgrade_required == 'yes'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v7.0.8
         with:
           token: ${{ steps.generate-token.outputs.token }}
           sign-commits: true
-          title: 'Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}'
+          title: "Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}"
           branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
           delete-branch: true
