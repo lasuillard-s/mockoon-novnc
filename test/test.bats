@@ -1,3 +1,5 @@
+#!/usr/bin/env bats
+
 setup_file() {
 	docker compose up --detach --build --wait --wait-timeout 30
 }
