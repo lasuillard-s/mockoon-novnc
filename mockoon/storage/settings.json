@@ -1,13 +1,12 @@
 {
   "welcomeShown": true,
-  "bannerDismissed": [],
   "maxLogsPerEnvironment": 50,
   "truncateRouteName": true,
   "mainMenuSize": 181,
   "secondaryMenuSize": 200,
   "fakerLocale": "en",
   "fakerSeed": null,
-  "lastChangelog": "9.0.0",
+  "lastChangelog": "9.4.0",
   "environments": [
     {
       "uuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
@@ -42,5 +41,8 @@
     "cloud": false
   },
   "activeEnvironmentUuid": "7da8af3d-b9d8-4b17-9285-914e03343b3d",
-  "enableRandomLatency": false
+  "enableRandomLatency": false,
+  "recentLocalEnvironments": [],
+  "displayLogsIsoTimestamp": false,
+  "deployPreferredRegion": null
 }
