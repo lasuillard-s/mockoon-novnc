@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # NOTE: Output versions is format of x.y.z without preceding v
+      # NOTE: Output version is in the format of x.y.z without preceding v
       - name: Query the latest version of Mockoon
         id: version-info
         run: |
