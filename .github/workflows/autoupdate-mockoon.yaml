@@ -14,6 +14,8 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
+
+      # NOTE: Output versions is format of x.y.z without preceding v
       - name: Query the latest version of Mockoon
         id: version-info
         run: |
@@ -47,5 +49,7 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           sign-commits: true
           title: "Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}"
+          body: |
+            New version of [Mockoon v${{ steps.version-info.outputs.latest_version }}](https://github.com/mockoon/mockoon/releases/tag/v${{ steps.version-info.outputs.latest_version }}) has been released.
           branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
           delete-branch: true
