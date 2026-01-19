@@ -50,6 +50,6 @@ jobs:
           sign-commits: true
           title: "Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}"
           body: |
-            New version of [Mockoon v${{ steps.version-info.outputs.latest_version }}](https://github.com/mockoon/mockoon/releases/tag/v${{ steps.version-info.outputs.latest_version }}) has been released.
+            [New version (v${{ steps.version-info.outputs.latest_version }}) of Mockoon](https://github.com/mockoon/mockoon/releases/tag/v${{ steps.version-info.outputs.latest_version }}) has been released.
           branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
           delete-branch: true
