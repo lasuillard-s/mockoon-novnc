@@ -18,7 +18,7 @@ jobs:
           submodules: true
 
       - uses: docker/setup-buildx-action@v3
-      - uses: bats-core/bats-action@3.0.1
+      - uses: bats-core/bats-action@4.0.0
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
