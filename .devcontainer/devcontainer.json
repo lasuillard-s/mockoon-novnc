@@ -1,19 +1,17 @@
 {
   "name": "lasuillard-s/mockoon-novnc",
-  "image": "mcr.microsoft.com/devcontainers/base:1-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/base:trixie",
   "features": {
     "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    }
   },
-  "postAttachCommand": "pre-commit install",
+  "postStartCommand": "./.devcontainer/postStartCommand.sh",
+  "updateContentCommand": "./.devcontainer/updateContentCommand.sh",
   "customizations": {
     "vscode": {
       "extensions": [
-        "ldez.ignore-files",
-        "gruntfuggly.todo-tree",
-        "redhat.vscode-yaml",
-        "tamasfe.even-better-toml",
-        "streetsidesoftware.code-spell-checker",
         "EditorConfig.EditorConfig",
         "jetmartin.bats",
         "foxundermoon.shell-format",

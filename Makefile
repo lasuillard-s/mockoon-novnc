@@ -19,8 +19,11 @@ help: Makefile  ## Show help
 # =============================================================================
 install:  ## Install deps
 	git submodule update --init --recursive
-	pre-commit install --install-hooks
 .PHONY: install
+
+init:  ## Initialize project
+	pre-commit install --install-hooks
+.PHONY: init
 
 update:  ## Update deps and tools
 	pre-commit autoupdate
@@ -37,9 +40,9 @@ run:  ## Run development server
 ci: lint test  ## Run CI tasks
 .PHONY: ci
 
-format:  ## Run autoformatters
+fmt:  ## Run autoformatters
 	pre-commit run --all-files shfmt
-.PHONY: format
+.PHONY: fmt
 
 lint:  ## Run all linters
 	pre-commit run --all-files shellcheck

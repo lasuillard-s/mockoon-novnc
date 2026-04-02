@@ -1,10 +1,5 @@
 {
   "recommendations": [
-    "ldez.ignore-files",
-    "gruntfuggly.todo-tree",
-    "redhat.vscode-yaml",
-    "tamasfe.even-better-toml",
-    "streetsidesoftware.code-spell-checker",
     "EditorConfig.EditorConfig",
     "jetmartin.bats",
     "foxundermoon.shell-format",
