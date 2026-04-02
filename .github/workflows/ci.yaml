@@ -18,7 +18,6 @@ jobs:
           submodules: true
 
       - uses: docker/setup-buildx-action@v3
-      - uses: bats-core/bats-action@4.0.0
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
@@ -31,4 +30,4 @@ jobs:
 
       - name: Run tests
         run: |
-          bats --verbose-run ./test
+          ./test/bats/bin/bats --verbose-run ./test
