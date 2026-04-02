@@ -1,3 +1,6 @@
+.devcontainer/
+.vscode/
+
 # Created by https://www.toptal.com/developers/gitignore/api/git,dotenv,linux,macos,windows,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,dotenv,linux,macos,windows,visualstudiocode
 
