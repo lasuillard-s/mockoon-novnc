@@ -13,7 +13,7 @@ services:
       - ${NOVNC_HOST:-127.0.0.1}:${NOVNC_PORT:-8080}:8080
       - ${NGINX_HOST:-127.0.0.1}:${NGINX_PORT:-80}:80
     healthcheck:
-      test: wget http://localhost/users --spider || exit 1
+      test: wget --output-file /dev/null http://localhost:80/users || exit 1
       interval: 3s
       timeout: 2s
       retries: 5
