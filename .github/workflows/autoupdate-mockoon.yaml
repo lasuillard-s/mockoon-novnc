@@ -22,6 +22,10 @@ jobs:
           current_version="$(cat .mockoon-version)"
           latest_version="$(curl --silent https://api.github.com/repos/mockoon/mockoon/releases/latest | jq -r '.tag_name')"
           latest_version="${latest_version#v}"
+          if [ "$latest_version" == "null" ]; then 
+            echo "Failed to query latest version of Mockoon. Please retry it again later."
+            exit 1
+          fi
           upgrade_required="$(dpkg --compare-versions "$latest_version" gt "$current_version" && echo "yes" || echo "no")"
 
           echo "current_version=${current_version}" | tee --append $GITHUB_OUTPUT
@@ -39,7 +43,7 @@ jobs:
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3
         id: generate-token
         with:
-          app-id: ${{ vars.GH_APP_ID }}
+          client-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Create pull request
