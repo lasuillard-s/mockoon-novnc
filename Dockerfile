@@ -19,12 +19,12 @@ RUN apt-get update && apt-get install -y \
     x11vnc \
     xdg-utils \
     xvfb \
-    && rm -rf /var/lib/apt/lists/*
+    && rm --recursive --force /var/lib/apt/lists/*
 
 COPY .mockoon-version ./
 RUN MOCKOON_VERSION="$(cat .mockoon-version)" \
     && wget --output-document /tmp/mockoon.deb "https://github.com/mockoon/mockoon/releases/download/v${MOCKOON_VERSION}/mockoon-${MOCKOON_VERSION}.$(dpkg --print-architecture).deb" \
-    && dpkg -i /tmp/mockoon.deb \
+    && dpkg --install /tmp/mockoon.deb \
     && rm /tmp/mockoon.deb
 
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf

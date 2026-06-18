@@ -2,9 +2,9 @@ services:
   app:
     build: .
     environment:
-      DISPLAY_WIDTH: "1600"
-      DISPLAY_HEIGHT: "900"
-      NGINX_PATHPORT: "yes"
+      DISPLAY_WIDTH: ${DISPLAY_WIDTH:-1600}
+      DISPLAY_HEIGHT: ${DISPLAY_HEIGHT:-900}
+      NGINX_PATHPORT: ${NGINX_PATHPORT:-yes}
     volumes:
       - /root/.config/mockoon
       - ./mockoon/storage:/root/.config/mockoon/storage
