@@ -9,44 +9,13 @@ Docker image for Mockoon GUI with noVNC.
 
 ## ✨ Features
 
-[Mockoon](https://mockoon.com/) is great free, open-source mock server GUI application provides rich features except it does not provide web-based UI. This image aims to provide an workaround for web-based UI of Mockoon, providing extra mocking functionalities for development environments:
+- **Web-based UI** to access Mockoon GUI through noVNC
+- **Path-based port forwarding** — route requests like `http://localhost/3000/path/to/mock` to port 3000
+- **Header-based port forwarding** — use `X-Port-Forward: 3678` header to target a specific port
 
-- Provide access to Mockoon GUI through web UI (noVNC)
+## 🚀 How to use
 
-- NGINX for path-based port forwarding
-
-    Mockoon provides features to run multiple Mockoon environments however you will need additional ports. Behind load balancers, for example, AWS Application Load Balancers (ALB), it's not easy to expose range of ports easily, if you wish to expose hundreds of ports (e.g. 3000-3999).
-
-    Here NGINX comes in. Instead of specifying port to host, send request as following:
-
-        http://localhost/3000/path/to/mock
-
-    NGINX will handle it for you just as you've sent it like:
-
-        http://localhost:3000/path/to/mock
-
-    By default, if port not specified in path it will be redirected to port 3000. Request to `http://localhost/path/to/mock` is equal to `http://localhost/3000/path/to/mock`.
-
-    > Only port range in 3000-3999 will be forwarded by configuration, otherwise NGINX will respond with **404 Not Found**.
-
-- Header-based port forwarding
-
-    Instead of port in path, you can use `X-Port-Forward` header to desired port number. It would be useful if you don't want path modification.
-
-    ```bash
-    $ curl --fail --silent http://localhost --header 'X-Port-Forward: 3678'
-    {"Hello": "World!"}
-    ```
-
-    Port range here also restricted to range of 3000-3999.
-
-    > Path-based port forwarding may take precedence.
-
-## 📔 Usage
-
-You can try this image with Docker Compose by simply checking it out and running `docker compose up --build`. For more details, please check `docker-compose.yaml` file.
-
-To pull and run image from [Docker Hub](https://hub.docker.com/r/lasuillard/mockoon-novnc), as follow:
+Pull and run the image from [Docker Hub](https://hub.docker.com/r/lasuillard/mockoon-novnc) as follows:
 
 ```bash
 $ docker run --rm \
@@ -59,42 +28,94 @@ $ docker run --rm \
     lasuillard/mockoon-novnc:main
 ```
 
-Below are variables defined by this image:
+The following endpoints are available (via NGINX):
 
-- `NGINX_PATHPORT`
+```mermaid
+---
+config:
+  theme: neutral
+---
+graph LR
+  browser[Browser]
+  mockoon[Mockoon]
+  novnc[noVNC]
+  nginx[NGINX]
 
-    To enable path-based port forwarding, set environment variable `NGINX_PATHPORT` to `"yes"` when you run the container.
+  browser -->|http://localhost:80| nginx
+  browser -->|http://localhost:8080| novnc
+  nginx -->|/| mockoon
+```
 
-Once the container is up, you can access to noVNC UI at port http://localhost:8080. By default, demo mock API will be available at http://localhost:3000 (or http://localhost/3000 if you've enabled the NGINX path port).
+- http://localhost:3000 for direct Mockoon access
+- http://localhost:80/ for Mockoon via NGINX
+- http://localhost:80/3000/path/to/mock for path-based port forwarding
+- http://localhost:8080 for noVNC web UI
 
-Test it with following simple `curl` command:
+Once the container is up, you can access the noVNC UI at http://localhost:8080. By default, the demo mock API will be available at http://localhost:3000 (or http://localhost:80/3000 if you've enabled NGINX path-based port forwarding).
+
+Test it with the following simple `curl` command:
 
 ```bash
 $ curl http://localhost:3000/users
 [{"id":"054bf92d-cf1f-4c66-8fc9-256a1f41c480","username":"Kaela10"},...]
 ```
 
-Or,
+Or, with NGINX path-based port forwarding enabled:
 
 ```bash
 $ curl http://localhost/3000/users
 [{"id":"054bf92d-cf1f-4c66-8fc9-256a1f41c480","username":"Kaela10"},...]
 ```
 
-Supported environment variables:
+### 🔀 Port forwarding
 
-- `DISPLAY_WIDTH`, `DISPLAY_HEIGHT`: noVNC display geometry. Each defaults to `1024` and `768`.
+This project uses NGINX to provide path-based and header-based port forwarding features, which are useful when running multiple Mockoon environments without exposing many external ports.
 
-- `NGINX_PATHPORT`: Whether to use NGINX path-based and header-based port forwarding. Disabled by default.
+#### Path-based port forwarding
+
+Instead of binding each Mockoon port to the host, send requests like:
+
+    http://localhost/3000/path/to/mock
+
+NGINX forwards this to port 3000 just like `http://localhost:3000/path/to/mock`. If no port is specified in the path, it falls back to port 3000.
+
+> Only ports in the range 3000–3999 will be forwarded; otherwise NGINX responds with **404 Not Found**.
+
+#### Header-based port forwarding
+
+Alternatively, use the `X-Port-Forward` header to specify a target port without modifying the path:
+
+    curl --fail --silent http://localhost --header 'X-Port-Forward: 3678'
+
+> The same port range restriction (3000–3999) applies, and path-based forwarding takes precedence.
+
+### ⚙️ Environment variables
+
+| Key                            | Description                                                                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DISPLAY_WIDTH`                | noVNC display width. Defaults to `1024`.                                                                                                                |
+| `DISPLAY_HEIGHT`               | noVNC display height. Defaults to `768`.                                                                                                                   |
+| `NGINX_PATHPORT`               | Enable NGINX path-based and header-based port forwarding. <br/>Set to `"yes"` to enable. Disabled by default.                                             |
+
+### 📂 Mount points
+
+- `/root/.config/mockoon` for Mockoon configuration and storage (persistent)
+- `/root/.config/mockoon/storage` for Mockoon environments, including mock API definitions and settings
 
 ## ⚠️ Limitations
 
 There are known limitations so far:
 
-- As base image built for amd64 architecture, it won't work properly on other architectures such as Apple with M chips. You will observe the QEMU crash logs.
-
 - Clipboard may not work properly for some languages due to limitations of noVNC itself, which the base image relies on. See related issue [here](https://github.com/novnc/noVNC/issues/1708).
 
-## 🙏 Thanks
+## 💖 Contributing
 
-This image previously has been built based on [theasp/novnc](https://github.com/theasp/docker-novnc/).
+Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more information on how to contribute to this project.
+
+## 🙏 Special thanks
+
+This image was previously built on [theasp/novnc](https://github.com/theasp/docker-novnc/).
+
+## 📜 License
+
+This project is licensed under the MIT License.
