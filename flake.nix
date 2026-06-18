@@ -22,6 +22,8 @@
             just
             shfmt
             shellcheck
+            mockoon
+            nginx
           ];
           shellHook = ''
             pre-commit install
