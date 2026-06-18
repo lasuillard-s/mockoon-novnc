@@ -20,7 +20,7 @@ This project uses the following tech stack:
 - [Fluxbox](http://fluxbox.org) for window management
 - [NGINX](https://nginx.org) for reverse proxy and port forwarding
 - [Supervisor](https://supervisord.org) for process management
-- [shfmt](https://github.com/mvdan/sh) and [shellcheck](https://github.com/koalaman/shellcheck) for linting shell scripts, and [BATS](https://github.com/bats-core/bats-core) for testing shell scripts
+- [shfmt](https://github.com/mvdan/sh) and [shellcheck](https://github.com/koalaman/shellcheck) for formatting and linting shell scripts, and [BATS](https://github.com/bats-core/bats-core) for running tests
 
 ### 📂 Key directory structure
 
