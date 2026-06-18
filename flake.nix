@@ -16,15 +16,12 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
+        packages = {
+          inherit (pkgs) pre-commit just shfmt shellcheck mockoon nginx;
+        };
+
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            pre-commit
-            just
-            shfmt
-            shellcheck
-            mockoon
-            nginx
-          ];
+          packages = builtins.attrValues self.packages.${system};
           shellHook = ''
             pre-commit install
           '';

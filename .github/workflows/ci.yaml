@@ -28,13 +28,13 @@ jobs:
         run: |
           git ls-files '*.sh' \
             | tee /dev/tty \
-            | xargs nix develop --command shfmt --diff
+            | xargs nix run .#shfmt -- --diff
 
       - name: Lint code
         run: |
           git ls-files '*.sh' \
             | tee /dev/tty \
-            | xargs nix develop --command shellcheck
+            | xargs nix run .#shellcheck --
 
   test:
     name: Test
