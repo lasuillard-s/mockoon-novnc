@@ -27,13 +27,13 @@ jobs:
       - name: Check code formatting
         run: |
           git ls-files '*.sh' \
-            | tee /dev/tty \
+            | tee /dev/stderr \
             | xargs nix run .#shfmt -- --diff
 
       - name: Lint code
         run: |
           git ls-files '*.sh' \
-            | tee /dev/tty \
+            | tee /dev/stderr \
             | xargs nix run .#shellcheck --
 
   test:
