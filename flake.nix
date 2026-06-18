@@ -17,7 +17,14 @@
       in
       {
         packages = {
-          inherit (pkgs) pre-commit just shfmt shellcheck mockoon nginx;
+          inherit (pkgs)
+            pre-commit
+            just
+            shfmt
+            shellcheck
+            mockoon
+            nginx
+            ;
         };
 
         devShells.default = pkgs.mkShell {
