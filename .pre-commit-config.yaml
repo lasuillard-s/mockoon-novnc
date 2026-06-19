@@ -1,21 +1,25 @@
+fail_fast: true
 exclude: mockoon/storage/.*
 repos:
-  - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.10.0-2
-    hooks:
-      - id: shfmt
-
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
-    hooks:
-      - id: shellcheck
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
 
-ci:
-  autofix_prs: true
-  autoupdate_schedule: quarterly
+  - repo: local
+    hooks:
+      - id: shfmt
+        name: shfmt
+        language: system
+        types: [shell]
+        exclude_types: [csh, tcsh]
+        entry: shfmt
+        args: [--write]
+
+      - id: shellcheck
+        name: shellcheck
+        language: system
+        types: [shell]
+        require_serial: true
+        entry: shellcheck

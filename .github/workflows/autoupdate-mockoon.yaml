@@ -1,19 +1,25 @@
 name: Autoupdate Mockoon
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   schedule:
     - cron: "0 0 * * 1" # Every Monday at 00:00 UTC (09:00 KST)
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   autoupdate:
+    name: Autoupdate
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       # NOTE: Output version is in the format of x.y.z without preceding v
       - name: Query the latest version of Mockoon
@@ -22,24 +28,24 @@ jobs:
           current_version="$(cat .mockoon-version)"
           latest_version="$(curl --silent https://api.github.com/repos/mockoon/mockoon/releases/latest | jq -r '.tag_name')"
           latest_version="${latest_version#v}"
-          if [ "$latest_version" == "null" ]; then 
+          if [ "$latest_version" == "null" ]; then
             echo "Failed to query latest version of Mockoon. Please retry it again later."
             exit 1
           fi
           upgrade_required="$(dpkg --compare-versions "$latest_version" gt "$current_version" && echo "yes" || echo "no")"
 
-          echo "current_version=${current_version}" | tee --append $GITHUB_OUTPUT
-          echo "latest_version=${latest_version}" | tee --append $GITHUB_OUTPUT
-          echo "upgrade_required=${upgrade_required}" | tee --append $GITHUB_OUTPUT
+          echo "current-version=${current_version}" | tee --append "$GITHUB_OUTPUT"
+          echo "latest-version=${latest_version}" | tee --append "$GITHUB_OUTPUT"
+          echo "upgrade-required=${upgrade_required}" | tee --append "$GITHUB_OUTPUT"
 
       - name: Update .mockoon-version file
-        if: steps.version-info.outputs.upgrade_required == 'yes'
+        if: steps.version-info.outputs.upgrade-required == 'yes'
         run: |
-          echo "${{ steps.version-info.outputs.latest_version }}" > .mockoon-version
-          echo "Updated .mockoon-version to version ${{ steps.version-info.outputs.latest_version }}"
+          echo "${{ steps.version-info.outputs.latest-version }}" > .mockoon-version
+          echo "Updated .mockoon-version to version ${{ steps.version-info.outputs.latest-version }}"
 
       - name: Generate GitHub App token
-        if: steps.version-info.outputs.upgrade_required == 'yes'
+        if: steps.version-info.outputs.upgrade-required == 'yes'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate-token
         with:
@@ -47,13 +53,22 @@ jobs:
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Create pull request
-        if: steps.version-info.outputs.upgrade_required == 'yes'
+        if: steps.version-info.outputs.upgrade-required == 'yes'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.generate-token.outputs.token }}
           sign-commits: true
-          title: "Update Mockoon version to ${{ steps.version-info.outputs.latest_version }}"
+          title: Update Mockoon to v${{ steps.version-info.outputs.latest-version }}
           body: |
-            [New version (v${{ steps.version-info.outputs.latest_version }}) of Mockoon](https://github.com/mockoon/mockoon/releases/tag/v${{ steps.version-info.outputs.latest_version }}) has been released.
-          branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest_version }}
+            [Mockoon v${{ steps.version-info.outputs.latest-version }}](https://github.com/mockoon/mockoon/releases/tag/v${{ steps.version-info.outputs.latest-version }}) has been released.
+
+            ### Changes
+            - Updated Mockoon version file (`.mockoon-version`) to v${{ steps.version-info.outputs.latest-version }}
+            - Ready for review and merge
+
+            ### Next steps
+            1. Review and merge this PR
+            2. Create and publish a new GitHub release
+            3. Publish workflow will automatically build and push a new Docker image to Docker Hub
+          branch: autoupdate-mockoon/${{ steps.version-info.outputs.latest-version }}
           delete-branch: true

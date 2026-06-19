@@ -1,9 +1,12 @@
 .devcontainer
 .vscode
-.envrc
 
-# Created by https://www.toptal.com/developers/gitignore/api/git,dotenv,linux,macos,windows,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=git,dotenv,linux,macos,windows,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/git,linux,macos,direnv,dotenv,windows,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,linux,macos,direnv,dotenv,windows,visualstudiocode
+
+### direnv ###
+.direnv
+.envrc
 
 ### dotenv ###
 .env
@@ -116,4 +119,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/git,dotenv,linux,macos,windows,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/git,linux,macos,direnv,dotenv,windows,visualstudiocode

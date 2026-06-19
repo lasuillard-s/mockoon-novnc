@@ -1,0 +1,13 @@
+{
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "files.readonlyInclude": {
+    "test/bats/**": true,
+    "test/test_helper/**": true
+  },
+  "search.exclude": {
+    "test/bats/**": true,
+    "test/test_helper/**": true
+  }
+}
