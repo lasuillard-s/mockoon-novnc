@@ -4,7 +4,7 @@ Thank you for your interest in contributing to **mockoon-novnc**.
 
 ## 🐛 Reporting issues
 
-Please report issues in our [GitHub repository](https://github.com/lasuillard/mockoon-novnc/issues). Before submitting an issue, please search for existing issues to avoid duplicates.
+Please report issues in our [GitHub repository](https://github.com/lasuillard-s/mockoon-novnc/issues). Before submitting an issue, please search for existing issues to avoid duplicates.
 
 ## 🏗️ Project overview
 
@@ -14,7 +14,7 @@ This project provide a Docker image for web-based access to the [Mockoon](https:
 
 This project uses the following tech stack:
 
-- [Debian](https://www.debian.org) Trixie as the base image
+- [Debian](https://www.debian.org) Trixie (13) as the base image
 - [Mockoon](https://mockoon.com) as a mock API server
 - [x11vnc](https://github.com/LibVNC/x11vnc), [websockify](https://github.com/novnc/websockify), [Xvfb](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml) and [noVNC](https://novnc.com) for browser-based VNC access
 - [Fluxbox](http://fluxbox.org) for window management
@@ -25,7 +25,7 @@ This project uses the following tech stack:
 ### 📂 Key directory structure
 
 - `docs/`: Documentation resources
-- `mockoon/storage/`: Mockoon mock API definitions and settings
+- `mockoon/storage/`: Initial Mockoon mock API definitions and settings to serve as a demo
 - `nginx/`: NGINX configuration files
 - `supervisord/`: Supervisord configuration files
 - `test/`: Project tests (BATS)
