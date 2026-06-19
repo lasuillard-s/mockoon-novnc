@@ -10,7 +10,7 @@ Docker image for Mockoon GUI with noVNC.
 ## ✨ Features
 
 - **Web-based UI** to access Mockoon GUI through noVNC
-- **Path-based port forwarding** — route requests like `http://localhost/3000/path/to/mock` to port 3000
+- **Path-based port forwarding** — route requests like `http://localhost:80/3000/path/to/mock` to port 3000
 - **Header-based port forwarding** — use `X-Port-Forward: 3678` header to target a specific port
 
 ## 🚀 How to use
@@ -19,9 +19,9 @@ Pull and run the image from [Docker Hub](https://hub.docker.com/r/lasuillard/moc
 
 ```bash
 $ docker run --rm \
+    -p 127.0.0.1:80:80 \
     -p 127.0.0.1:3000:3000 \
     -p 127.0.0.1:8080:8080 \
-    -p 127.0.0.1:80:80 \
     -e DISPLAY_WIDTH=1024 \
     -e DISPLAY_HEIGHT=768 \
     -e NGINX_PATHPORT=yes \
@@ -31,10 +31,6 @@ $ docker run --rm \
 The following endpoints are available (via NGINX):
 
 ```mermaid
----
-config:
-  theme: neutral
----
 graph LR
   browser[Browser]
   mockoon[Mockoon]
@@ -46,9 +42,9 @@ graph LR
   nginx -->|/| mockoon
 ```
 
-- http://localhost:3000 for direct Mockoon access
 - http://localhost:80/ for Mockoon via NGINX
 - http://localhost:80/3000/path/to/mock for path-based port forwarding
+- http://localhost:3000 for direct Mockoon access
 - http://localhost:8080 for noVNC web UI
 
 Once the container is up, you can access the noVNC UI at http://localhost:8080. By default, the demo mock API will be available at http://localhost:3000 (or http://localhost:80/3000 if you've enabled NGINX path-based port forwarding).
@@ -63,7 +59,7 @@ $ curl http://localhost:3000/users
 Or, with NGINX path-based port forwarding enabled:
 
 ```bash
-$ curl http://localhost/3000/users
+$ curl http://localhost:80/3000/users
 [{"id":"054bf92d-cf1f-4c66-8fc9-256a1f41c480","username":"Kaela10"},...]
 ```
 
@@ -75,7 +71,9 @@ This project uses NGINX to provide path-based and header-based port forwarding f
 
 Instead of binding each Mockoon port to the host, send requests like:
 
-    http://localhost/3000/path/to/mock
+```bash
+$ curl --fail --silent http://localhost:80/3000/path/to/mock
+```
 
 NGINX forwards this to port 3000 just like `http://localhost:3000/path/to/mock`. If no port is specified in the path, it falls back to port 3000.
 
@@ -85,7 +83,9 @@ NGINX forwards this to port 3000 just like `http://localhost:3000/path/to/mock`.
 
 Alternatively, use the `X-Port-Forward` header to specify a target port without modifying the path:
 
-    curl --fail --silent http://localhost --header 'X-Port-Forward: 3678'
+```bash
+$ curl --fail --silent http://localhost --header 'X-Port-Forward: 3678'
+```
 
 > The same port range restriction (3000–3999) applies, and path-based forwarding takes precedence.
 

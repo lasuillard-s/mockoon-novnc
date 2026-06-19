@@ -16,7 +16,7 @@ teardown_file() {
 # Basic tests
 # ============================================================================
 @test "NGINX forward traffic to Mockoon 3000 port by default" {
-  run curl --fail http://localhost/users
+  run curl --fail http://localhost:80/users
   assert_success
 }
 
@@ -29,15 +29,15 @@ teardown_file() {
 # ============================================================================
 @test "NGINX handle port range 3000-3999 in path component" {
   # Out of range (below 3000)
-  run curl --fail http://localhost/2999/users
+  run curl --fail http://localhost:80/2999/users
   assert_failure 22 # (22) The requested URL returned error: 404
 
   # Demo (default)
-  run curl --fail http://localhost/3000/users
+  run curl --fail http://localhost:80/3000/users
   assert_success
 
   # Out of range (over 3999)
-  run curl --fail http://localhost/4000/users
+  run curl --fail http://localhost:80/4000/users
   assert_failure 22 # (22) The requested URL returned error: 404
 }
 
@@ -45,14 +45,14 @@ teardown_file() {
 # ============================================================================
 @test "Header-based port forwarding with X-Port-Forward header" {
   # Out of range (below 3000)
-  run curl --fail http://localhost --header 'X-Port-Forward: 2999'
+  run curl --fail http://localhost:80 --header 'X-Port-Forward: 2999'
   assert_failure 22 # (22) The requested URL returned error: 404
 
   # Test open for 3678
-  run curl --fail --silent http://localhost --header 'X-Port-Forward: 3678'
+  run curl --fail --silent http://localhost:80 --header 'X-Port-Forward: 3678'
   assert_output '{"Hello": "World!"}'
 
   # Out of range (over 3999)
-  run curl --fail http://localhost --header 'X-Port-Forward: 4000'
+  run curl --fail http://localhost:80 --header 'X-Port-Forward: 4000'
   assert_failure 22 # (22) The requested URL returned error: 404
 }
