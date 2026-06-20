@@ -16,13 +16,13 @@ alias up := update
 # =============================================================================
 
 # Run all checks
-ci: lint test
+ci: (format "yes") lint test
 
 # Autoformat code
-format:
+[arg("check", long="check", value="yes")]
+format check="no":
     git ls-files --cached --others --exclude-standard '*.sh' \
-        | tee /dev/tty \
-        | xargs shfmt --write
+        | xargs shfmt {{ if check == "yes" { "--list" } else { "--list --write" } }}
 
 alias fmt := format
 
@@ -35,12 +35,6 @@ lint:
 # Run all tests
 test:
     ./test/bats/bin/bats --formatter pretty --verbose-run ./test
-
-# Apply autofixes
-fix:
-    git ls-files --cached --others --exclude-standard '*.sh' \
-        | tee /dev/tty \
-        | xargs shfmt --write
 
 # Build the Docker image with tag mockoon-novnc:local
 build:
