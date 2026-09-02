@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker Image Version](https://img.shields.io/docker/v/lasuillard/mockoon-novnc?sort=semver)](https://hub.docker.com/r/lasuillard/mockoon-novnc)
 
-Docker image for Mockoon GUI through noVNC.
+Docker image for [Mockoon](https://github.com/mockoon/mockoon) GUI through noVNC.
 
 ![Demo](/docs/demo.png)
 
